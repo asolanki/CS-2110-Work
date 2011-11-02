@@ -101,7 +101,14 @@ public class TweetStore {
 		
 	public void report() {
 		System.out.println("Name of Store: " + name);
-		System.out.println(TMap.entrySet());
+		
+		Set<String> keys = TMap.keySet();
+		
+		for (String key: keys) {
+			System.out.println("  Key: " + key);
+			System.out.println("   Tweets: " + TMap.get(key));
+		}
+		
 		
 
 		//get the key set and get the list for each key and print them

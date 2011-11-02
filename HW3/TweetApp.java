@@ -5,7 +5,10 @@ import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
@@ -18,7 +21,10 @@ public class TweetApp {
 	private static TweetStore byAuthor = new TweetStore("author");
 	private static TweetStore byHashtag = new TweetStore("hashtag");
 	TreeMap<String, Integer> wordFreq = new TreeMap<String, Integer>();
+	Scanner myKeyboard=new Scanner(System.in);
 
+
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
@@ -26,11 +32,13 @@ public class TweetApp {
 		System.out.println("Enter the name of file");
 		String filename=myKeyboard.nextLine();
 		
-		
 		TweetApp twitter=new TweetApp();
 		
-		//store a collection of tweets, getting them from a file or input source
+		
 		twitter.loadTweets(filename);
+		
+		
+		
 		
 		
 		
@@ -43,17 +51,15 @@ public class TweetApp {
 		
 		
 		
-		
-		//twitter.topHash();
+		System.out.println("Most frequent HashTags:");
+		System.out.println("  " + twitter.topHash());
 			//print a list of top 10 hashtags, highest frequency
 		
-		
-		
-			
-	//DOES CASE MATTER?  If so, we need to change the population of wordfreq and perhaps other sets
-		//twitter.mostFreq();
+		System.out.println("Most frequently occuring words:");
+		System.out.println("  " + twitter.mostFreq()
+				);
 			//print a list of 10 most frequent words
-			//twitter.wordFreq.subMap(twitter.wordFreq.firstKey(), twitter.wordFreq.);
+					//twitter.wordFreq.subMap(twitter.wordFreq.firstKey(), twitter.wordFreq.);
 		
 		//Show two similar tweets
 		
@@ -61,8 +67,9 @@ public class TweetApp {
 		
 	}
 	
+
 	
-	private void mostFreq() {
+	private Map<String, Integer> mostFreq() {
 		
 		Set<String> words = wordFreq.keySet();
 		ArrayList<StringCount> sorter = new ArrayList<StringCount>();
@@ -74,10 +81,21 @@ public class TweetApp {
 		
 		
 		Collections.sort(sorter, compare);
-		String[] result = new String[10];
-		for (int i = 0; i<11; i++) {
-			System.out.println(sorter.get(i).getWord());
+		Map<String, Integer> result = new LinkedHashMap<String, Integer>();
+		
+		//makes sure its only 10 words max displayed
+		int size;
+		if (sorter.size() < 10) {
+			size = sorter.size();
+		} else { size = 10; }
+		
+		//populates result Map with words and counts
+		for (int i = 0; i<size	; i++) {
+			result.put(sorter.get(i).getWord(), sorter.get(i).getCount());
+			//result.add(i, sorter.get(i).getWord());
 		}
+		
+		return result;
 		
 //		Set<String> keys = TMap.keySet();
 //		List<StringCount> sorter = new ArrayList<StringCount>();
@@ -115,17 +133,20 @@ public class TweetApp {
 		}
 		};
 	
-	private void topHash() {
+	private ArrayList<String> topHash() {
 		ArrayList<String> hashFreq = (ArrayList<String>) this.tweetsByHashTag().getKeysByFrequency();
-		int i = 11;
+		ArrayList<String> result = new ArrayList<String>();
+		int i;
 		int size = hashFreq.size();
 		if (size < 10) {
 			i = size;
-		}
+		} else {i = 10;};
 		
 		for (int j = 0; j < i; j++) {
-			System.out.println(hashFreq.get(j));
+			result.add(j, hashFreq.get(j));
 		}
+		
+		return result;
 	}
 
 	public boolean loadTweets(String fileName) {
@@ -136,6 +157,8 @@ public class TweetApp {
 			tweetdata = new Scanner(sfile);
 			return loadTweets(tweetdata);
 		} catch (FileNotFoundException e) {
+			System.out.println("No such file, run program again.");
+			System.exit(0);
 			return false;
 		}
 	}

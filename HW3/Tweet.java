@@ -72,9 +72,11 @@ public class Tweet {
 		
 		for (int i=0; i<words.length;i++) {
 			String s=stripPunctuation(words[i]);
+			
 			if(s==null){
 				continue;
 			}else{
+				s = s.toLowerCase();
 				wordtokens.add(s);
 			}
 			
