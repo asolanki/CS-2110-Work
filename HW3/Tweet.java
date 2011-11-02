@@ -1,3 +1,13 @@
+/*
+ * /**
+	 * Brittany Fuller- brf5hc 
+	 * Adarsh Solanki- as5nr
+	 * Homework 3: Tweet Tweet
+	 * Lab Section: 101
+	 * 
+ */
+
+package edu.virginia.cs2110;
 import java.util.ArrayList;
 import java.util.List;
 
