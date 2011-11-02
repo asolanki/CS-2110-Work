@@ -9,7 +9,6 @@ public class StringCount implements Comparable<StringCount> {
 	private String word;
 	private int wordCounter;
 	private List<Tweet> tweetList;
-	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -21,18 +20,23 @@ public class StringCount implements Comparable<StringCount> {
 		tweetList=tL;
 	}
 	
+	public StringCount(String w, int wC){
+		word=w;
+		wordCounter=wC;
+		this.tweetList=null;
+	}
+	
 	@Override
 	public int compareTo(StringCount o) {		
 		return this.wordCounter-o.wordCounter;
 	}
 	
-	
 	public int getCount(){
 		return wordCounter;
-	}
+		}
 	
 	public String getWord(){
 		return word;
-	}
+		}
 
 }

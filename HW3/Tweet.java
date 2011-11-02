@@ -7,20 +7,26 @@ public class Tweet {
 	 * @param args
 	 */
 	private String date;
-	private static int idCount = 0;
+	private int id = 0;
+	private static int idCount=0;
 	private String text;
 	private String author;
-	private int id;
+	
 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Tweet t = new Tweet("brittany", "10/26", "hello hello, hi!");
 		System.out.println(t.extractWords());
 
-		Tweet t2 = new Tweet("b", "10/27", "alskjdfoaisdn");
+		Tweet t2 = new Tweet("b", "10/27", "als kjd-foai! #sdn");
+		System.out.println(t2.extractWords());
+		
 		System.out.println(t.getId());
-		System.out.println(t2.getId());
+	
 		System.out.println(idCount);
+		
+		
 
 	}
 
@@ -46,8 +52,9 @@ public class Tweet {
 		} else {
 			text = text1;
 		}
-		idCount += 1;
-		this.id = Tweet.idCount;
+		idCount++;
+		id=Tweet.idCount;
+		
 		author = author1;
 		date = date1;
 
@@ -61,11 +68,16 @@ public class Tweet {
 
 
 		List<String> wordtokens = new ArrayList<String>();
-		String[] words = this.text.split("//s+");
-
-		for (String s : words) {
-			s = stripPunctuation(s);
-			wordtokens.add(s);
+		String[] words = this.text.split(" ");
+		
+		for (int i=0; i<words.length;i++) {
+			String s=stripPunctuation(words[i]);
+			if(s==null){
+				continue;
+			}else{
+				wordtokens.add(s);
+			}
+			
 
 		}
 
@@ -75,17 +87,36 @@ public class Tweet {
 
 	public String stripPunctuation(String s) {
 
-		StringBuffer sb = new StringBuffer();
+		String sb = null;
+		if (s.equals(":-)") || s.equals("(:") || s.equals("(;")) {
+			return s;
+		} else {
 
-		for (int i = 0; i < s.length(); i++) {
-			if ((s.charAt(i) >= 65 && s.charAt(i) <= 90)
-					|| (s.charAt(i) >= 97 && s.charAt(i) <= 122)) {
+			for (int i = 0; i < s.length(); i++) {
 
-				sb = sb.append(s.charAt(i));
+				if ((s.charAt(i) >= 64 && s.charAt(i) <= 90)
+						|| (s.charAt(i) >= 97 && s.charAt(i) <= 122)
+						|| s.charAt(i) == 35) {
+
+					sb = s.substring(i, s.length());
+					break;
+				}
 			}
 		}
+		String sb2 = null;
+		if (sb == null) {
+			return null;
+		} else {
+			for (int i = sb.length() - 1; i > 0; i--) {
+				if ((sb.charAt(i) >= 65 && sb.charAt(i) <= 90)
+						|| (sb.charAt(i) >= 97 && sb.charAt(i) <= 122)) {
 
-		return sb.toString();
+					sb2 = sb.substring(0, i+1);
+					break;
+				}
+			}
+		}
+		return sb2;
 	}
 
 }

@@ -17,19 +17,22 @@ public class TweetStore {
 		// TODO Auto-generated method stub
 		TweetStore ts = new TweetStore("t1");
 		Tweet t = new Tweet("brittany", "10/26", "hello hello, hi!");
-		Tweet t2 = new Tweet("b", "10/27", "hello hello hello hello");
+		Tweet t2 = new Tweet("b", "10/27", "alskjdfoaisdn");
 		Tweet t3 = new Tweet("b", "10/29", "hello there hello hello");
 		
 		ts.addTweet("hello", t);
-		ts.addTweet("hello", t2);
-		ts.addTweet("hi", t);
-		ts.addTweet("brittany", t);
-		ts.addTweet("k", t2);
-		ts.addTweet("k", t);
-		ts.addTweet("k", t3);
 		
-		System.out.println(ts.getKeysByFrequency());
+		
+		ts.addTweet("hello", t);		
+		ts.addTweet("hello", t2);		
+		ts.addTweet("hi", t);		
+		ts.addTweet("brittany", t);		
+		ts.addTweet("k", t2);		
+		ts.addTweet("k", t);		
+		ts.addTweet("k", t3);		
+		System.out.println(ts.getKeysByFrequency());		
 		ts.report();
+		
 	}
 
 	public TweetStore(String name1) {
@@ -66,43 +69,39 @@ public class TweetStore {
 	public List<String> getKeysByFrequency() {
 		// return list of keys sorted in order of descending frequency of tweets
 		// stored for key
-		// either map
-		// more than one tweetstore
-		// one tweet store where the keys are author, one with hashtag,
+		//either map 
+		//more than one tweetstore 
+		//one tweet store where the keys are author, one with hashtag,
 
 		Set<String> keys = TMap.keySet();
 		List<StringCount> sorter = new ArrayList<StringCount>();
-
 		for (String key : keys) {
 			List<Tweet> tList = TMap.get(key);
 			int size = tList.size();
 			StringCount sc = new StringCount(key, size, tList);
 			sorter.add(sc);
-		}
-
+			}
 		Collections.sort(sorter, compare);
-
-		List<String> result = new ArrayList<String>();
-
-		for (StringCount sc : sorter) {
-			result.add(sc.getWord());
-		}
-
+			List<String> result = new ArrayList<String>();
+			for (StringCount sc : sorter) {
+				result.add(sc.getWord());
+		}		
 		return result;
+		
+		
 
 	}
 
 	public final Comparator<StringCount> compare = new Comparator<StringCount>() {
-
 		public int compare(StringCount s1, StringCount s2) {
-			return s2.getCount() - s1.getCount();
+		return s2.getCount() - s1.getCount();		
 		}
-	};
-
+		};
+		
+		
 	public void report() {
 		System.out.println("Name of Store: " + name);
 		System.out.println(TMap.entrySet());
-		
 		
 
 		//get the key set and get the list for each key and print them
