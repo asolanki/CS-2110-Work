@@ -34,11 +34,11 @@ public class TweetApp {
 		
 		
 		
-		//twitter.tweetsByAuthor().report();
+		twitter.tweetsByAuthor().report();
 			//print a list of tweets grouped by author, with groups sorted by author
 	
 		
-		//twitter.tweetsByHashTag().report();
+		twitter.tweetsByHashTag().report();
 			//print a list of tweets grouped by hashtag, with groups sorted by hashtag
 		
 		
@@ -53,13 +53,14 @@ public class TweetApp {
 	//DOES CASE MATTER?  If so, we need to change the population of wordfreq and perhaps other sets
 		//twitter.mostFreq();
 			//print a list of 10 most frequent words
-		//twitter.wordFreq.subMap(twitter.wordFreq.firstKey(), twitter.wordFreq.);
+			//twitter.wordFreq.subMap(twitter.wordFreq.firstKey(), twitter.wordFreq.);
 		
 		//Show two similar tweets
 		
 		
 		
 	}
+	
 	
 	private void mostFreq() {
 		
@@ -174,7 +175,7 @@ public class TweetApp {
 
 			for (String s : words) {
 				if (s.charAt(0) == '#') {
-					byHashtag.addTweet(s, t0);
+					byHashtag.addTweet(s.substring(1), t0);
 				}
 
 			}
@@ -183,6 +184,7 @@ public class TweetApp {
 			//get the top ten most freqent words
 			//not sure if this works
 			for (int i = 0; i < words.size(); i++) {
+				
 				if (wordFreq.containsKey(words.get(i))) {
 					value = wordFreq.get(words.get(i)) + 1;
 				} else {
@@ -204,6 +206,7 @@ public class TweetApp {
 	}
 
 	public TweetStore tweetsByHashTag() {
+		
 		return byHashtag;
 	}
 	
