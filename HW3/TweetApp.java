@@ -230,8 +230,13 @@ public class TweetApp {
 			}
 
 			Tweet t0 = new Tweet(author, date, text);
-
+			
+			System.out.println(text);
+			
+			
 			ArrayList<String> words = (ArrayList<String>) t0.extractWords();
+			
+			System.out.println(words);
 			
 			int value = 0;
 			
@@ -250,17 +255,29 @@ public class TweetApp {
 					hashFreq.put(s, value);
 					byHashtag.addTweet(s, t0);		
 				}
-					
-					
-					
-					
-				
-
 			}
 
 			value = 0;
+			
+			
 			// get the top ten most freqent words
 			// not sure if this works
+			
+			
+//			for (String s : words) {
+//				if (s.charAt(0) == '#') {
+//					s = s.substring(1);
+//					if (wordFreq.containsKey(s)) {
+//						value = wordFreq.get(s) + 1;
+//					} else {
+//						value = 1;
+//					}
+//					wordFreq.put(s, value);		
+//				}
+//			}
+			
+			
+			
 			for (int i = 0; i < words.size(); i++) {
 
 				if (wordFreq.containsKey(words.get(i))) {
@@ -271,6 +288,10 @@ public class TweetApp {
 				wordFreq.put(words.get(i), value);
 
 			}
+			
+			
+			
+			
 			byAuthor.addTweet(author, t0);
 
 		}

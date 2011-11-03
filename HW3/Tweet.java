@@ -106,13 +106,19 @@ public class Tweet {
 
 			for (int i = 0; i < s.length(); i++) {
 
-				if ((s.charAt(i) >= 64 && s.charAt(i) <= 90)
-						|| (s.charAt(i) >= 97 && s.charAt(i) <= 122)
-						|| s.charAt(i) == 35) {
-
+				
+				
+				if ((s.charAt(i) <= 64) || (s.charAt(i) >= 91 || s.charAt(i) <= 96) 
+						|| (s.charAt(i) >= 123)) {
+				
+				
+//				if ((s.charAt(i) >= 64 && s.charAt(i) <= 90) 
+//						|| (s.charAt(i) >= 97 && s.charAt(i) <= 122)
+//						|| s.charAt(i) == 35) {
+//
 					sb = s.substring(i, s.length());
 					break;
-				}
+				} else {sb = s;}
 			}
 		}
 		String sb2 = null;
@@ -120,15 +126,18 @@ public class Tweet {
 			return null;
 		} else {
 			for (int i = sb.length() - 1; i > 0; i--) {
-				if ((sb.charAt(i) >= 65 && sb.charAt(i) <= 90)
-						|| (sb.charAt(i) >= 97 && sb.charAt(i) <= 122)) {
+				if ((s.charAt(i) <= 64) || (s.charAt(i) >= 91 || s.charAt(i) <= 96) 
+						|| (s.charAt(i) >= 123)) {
+//				if ((sb.charAt(i) >= 65 && sb.charAt(i) <= 90)
+//						|| (sb.charAt(i) >= 97 && sb.charAt(i) <= 122)) {
 
 					sb2 = sb.substring(0, i+1);
 					break;
 				}
 			}
+			
 		}
-		return sb2;
+		return sb2 == null ? sb : sb2;
 	}
 
 }
