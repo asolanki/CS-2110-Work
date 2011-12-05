@@ -1,5 +1,10 @@
 package edu.virginia.cs2110;
 
+/**Brittany Fuller- brf5hc 
+ * Adarsh Solanki- as5nr
+ * Homework 4: Random Sentence Generator
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -17,19 +22,16 @@ public class Grammar {
 	private String gName;
 	private String nonterminal;
 
+	//written by Brittany
 	public Grammar(String grammar) {
 		gName = grammar;
 		gParts = new TreeMap<String, ArrayList<String[]>>();
 	}
 
-	// public void addTerminal(String nt,String t){
-	// ArrayList<String> list=this.gParts.get(nt);
-	// list.add(t);
-	// }
-
+	//written by both Brittany and Adarsh
 	public void loadGrammar(String s) {
 		boolean inBlock;
-		String nonterminal = null; // <nonterminals> get recursively processed
+		nonterminal = null; // <nonterminals> get recursively processed
 		ArrayList<String[]> productions = null; // options when processing a
 												// nonterminal
 												// each string[] is a possible
@@ -56,32 +58,29 @@ public class Grammar {
 
 							line2 = scnr.nextLine();
 							if (line2.trim().equals("}")) { // done with this
-															// block
-								inBlock = false;
+								inBlock = false;			// block
 								break;
 							} else {
-								// "\\s+" is regular expression for one or more
-								// whitespace chars
 								String[] symbols = line2.split("\\s+");
-								productions.add(symbols); // these are the
-															// individual
-															// words/nonterms
+								productions.add(symbols); 
+								// symbols = the individual words/nonterms in
+								// each production
 							}
 						}
 					}
 					gParts.put(nonterminal, productions); // add to
 															// datastructure
-
-				} else {
 				}
 			}
-		} catch (FileNotFoundException e) {
-		}
+		} catch (FileNotFoundException e) {}
 	}
 
 	/*
-	 * This exists for testing reasons only
+	 * This exists for testing reasons only to visualize the parsing of
+	 * a grammar file
 	 */
+	
+	//written by Adarsh
 	@Override
 	public String toString() {
 		String result = gName + " grammar: \n";
@@ -98,19 +97,11 @@ public class Grammar {
 				}
 			}
 			result += "\n";
-
 		}
-
 		return result;
-
 	}
 
 	public TreeMap<String, ArrayList<String[]>> getGParts() {
 		return gParts;
 	}
-
-	public String getGName() {
-		return gName;
-	}
-
 }
